@@ -9,7 +9,6 @@ var BowerRCCommand = {
 	init: function (args) {
 		this.root = path.dirname(require.main.filename);
 		this.getTask(args);
-		//TODO - set the bower template file with user input
 	},
 	getTask:function(args){
 		if (args.length - 1 == this.argsLength) {

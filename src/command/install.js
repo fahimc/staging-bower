@@ -12,7 +12,6 @@ var InstallCommand = {
 		this.root = path.dirname(require.main.filename);
 		this.cwd = process.cwd();
 		this.getTask(args);
-		//TODO - set the bower template file with user input
 	},
 	getTask:function(args){
 		if (args.length - 1 == this.argsLength) {
