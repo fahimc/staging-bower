@@ -1,0 +1,27 @@
+{
+  "name": "staging-bower",
+  "version": "1.0.0",
+  "description": "test bower modules locally",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fahimc/staging-bower.git"
+  },
+  "dependencies": {
+    "shelljs": "^0.5.3",
+    "rimraf": "^2.4.3"
+  },
+  "keywords": [
+    "staging",
+    "bower"
+  ],
+  "author": "Fahim Chowdhury <fahim.chowdhury@thomsonreuters.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fahimc/staging-bower/issues"
+  },
+  "homepage": "https://github.com/fahimc/staging-bower"
+}
