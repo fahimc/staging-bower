@@ -1,6 +1,5 @@
 var Logger ={
 	init:function(){
-
 	},
 	warn:function(message){
 		console.warn('\x1b[33m WARNING: '+message+this.reset());

@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 var StagingBower = {
 	commandIndex:2,
 	command:{

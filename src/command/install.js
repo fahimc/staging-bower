@@ -1,11 +1,16 @@
 require('shelljs/global');
 rmdir = require('rimraf');
+var path = require('path');
 var fs = require('fs');
 var InstallCommand = {
 	Logger: require('../logger.js'),
 	argsLength: 3,
 	packageName: '',
+	cwd:'',
+	root:'',
 	init: function (args) {
+		this.root = path.dirname(require.main.filename);
+		this.cwd = process.cwd();
 		this.getTask(args);
 		//TODO - set the bower template file with user input
 	},
@@ -22,34 +27,34 @@ var InstallCommand = {
 		
 	},
 	createBowerFolder:function(){
-		var dir = './bower_components';
+		var dir = this.cwd+'/bower_components';
 		if (!fs.existsSync(dir)){
 			fs.mkdirSync(dir);
 		}
 	},
 	getInstallJSON:function(){
-		var filePath = './installed_modules/'+this.packageName+'.json';
+		var filePath = this.root+'/installed_modules/'+this.packageName+'.json';
 		fs.readFile(filePath, 'utf8', this.onGetJSON.bind(this));
 	},
 	getBowerRCJSON:function(){
-		var filePath = './src/bower/bowerrc.json';
+		var filePath = this.root+'/src/bower/bowerrc.json';
 		fs.readFile(filePath, 'utf8', this.onGetBowerRCJSON.bind(this));
 	},
 	getProjectBowerJSON:function(){
-		var filePath = './bower_components/'+this.packageName+'/bower.json';
+		var filePath = this.cwd+'/bower_components/'+this.packageName+'/bower.json';
 		fs.readFile(filePath, 'utf8', this.onGetProjectBowerJSON.bind(this));
 	},
 	createBowerRC:function(content){
 		content["directory"]="../";
-		fs.writeFile('./bower_components/'+this.packageName+'/.bowerrc', JSON.stringify(content, null, 4), this.onBowerFileCreated.bind(this));
+		fs.writeFile(this.cwd+'/bower_components/'+this.packageName+'/.bowerrc', JSON.stringify(content, null, 4), this.onBowerFileCreated.bind(this));
 	},
 	updateVersionNumber:function(content){
 		content["version"]="1000.200.200";
-		var filePath = './bower_components/'+this.packageName+'/bower.json';
+		var filePath = this.cwd+'/bower_components/'+this.packageName+'/bower.json';
 		fs.writeFile(filePath, JSON.stringify(content, null, 4), this.onVersionUpdated.bind(this));
 	},
 	runBowerInstall:function(){
-		cd('./bower_components/'+this.packageName);
+		cd(this.cwd+'/bower_components/'+this.packageName);
 		if (exec('bower install').code !== 0) {
 			this.Logger.error('Can\'t run bower install' );
 		}else{
@@ -57,7 +62,7 @@ var InstallCommand = {
 		}
 	},
 	removeProject:function(){
-		var dir = './bower_components/'+this.packageName;
+		var dir = this.cwd+'/bower_components/'+this.packageName;
 		if (!fs.existsSync(dir)){
 			this.getInstallJSON();
 		}else{

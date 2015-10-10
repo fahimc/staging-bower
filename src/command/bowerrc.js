@@ -1,10 +1,13 @@
 require('shelljs/global');
 var fs = require('fs');
+var path = require('path');
 var BowerRCCommand = {
 	Logger: require('../logger.js'),
 	argsLength: 3,
 	path: '',
+	root: '',
 	init: function (args) {
+		this.root = path.dirname(require.main.filename);
 		this.getTask(args);
 		//TODO - set the bower template file with user input
 	},
@@ -15,7 +18,6 @@ var BowerRCCommand = {
 		}
 	},
 	save:function(){
-		console.log(this.path);
 		if (!fs.existsSync(this.path)){
 			this.Logger.error('file does not exist');
 		}else{
@@ -27,7 +29,7 @@ var BowerRCCommand = {
 	},
 	storeRC:function(content){
 		content["directory"]="../";
-		var filePath = './src/bower/bowerrc.json';
+		var filePath = this.root+'/src/bower/bowerrc.json';
 		fs.writeFile(filePath, JSON.stringify(content, null, 4), this.onBowerFileCreated.bind(this));
 	},
 	onGetRC:function(err,data){

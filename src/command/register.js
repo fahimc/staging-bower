@@ -1,4 +1,5 @@
 var fs = require('fs');
+var path = require('path');
 var RegisterCommand = {
 	Logger: require('../logger.js'),
 	argsLength: 4,
@@ -6,18 +7,27 @@ var RegisterCommand = {
 	repo:'',
 	branch:'staging',
 	filePath:'',
+	root:'',
 	init: function (args) {
+		this.root = path.dirname(require.main.filename);
 		this.getTask(args);
 	},
 	getTask: function (args) {
 		if (args.length - 1 == this.argsLength) {
 			this.packageName = args[this.argsLength - 1];
 			this.repo = args[this.argsLength];
-			this.install();
+			this.createFolder();
 		}
 	},
+	createFolder:function(){
+		var dir = this.root+'/installed_modules';
+		if (!fs.existsSync(dir)){
+			fs.mkdirSync(dir);
+		}
+		this.install();
+	},
 	install: function () {
-		this.filePath = './installed_modules/' + this.packageName + '.json';
+		this.filePath = this.root+'/installed_modules/' + this.packageName + '.json';
 		fs.stat(this.filePath, this.onCheckFile.bind(this));
 	},
 	onCheckFile:function(err, stat){
