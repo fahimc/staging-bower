@@ -1,6 +1,6 @@
 require('shelljs/global');
 var fs = require('fs');
-var InstallCommand = {
+var BowerRCCommand = {
 	Logger: require('../logger.js'),
 	argsLength: 3,
 	path: '',
@@ -47,5 +47,5 @@ var InstallCommand = {
 	}
 }
 
-module.exports = InstallCommand.init.bind(InstallCommand);
+module.exports = BowerRCCommand.init.bind(BowerRCCommand);
 
