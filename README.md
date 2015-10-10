@@ -6,6 +6,11 @@ When using this to register your bower module it stores a reference to the repo 
 
 Then when you use the install command it will pull the staging branch of the bower module and install all the dependencies into the bower_components folder. 
 
+##Install
+```
+npm install -g https://github.com/fahimc/staging-bower.git
+```
+
 ### staging-bower register `<packageName> <repo>`  
 This will store the package reference.  
 Example:
