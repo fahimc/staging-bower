@@ -11,21 +11,23 @@ Then when you use the install command it will pull the staging branch of the bow
 npm install -g https://github.com/fahimc/staging-bower.git
 ```
 
-### staging-bower register `<packageName> <repo>`  
+## Options
+
+#### staging-bower register `<packageName> <repo>`  
 This will store the package reference.  
 Example:
 ```
 staging-bower register test-module https://github.com/fahimc/test-module.git
 ```
 
-### staging-bower install `<packageName>`  
+#### staging-bower install `<packageName>`  
 This will install the package into the current folder under bower_components.  
 Example:
 ```
 staging-bower install test-module
 ```
 
-### staging-bower bowerrc `<pathToFile>`  
+#### staging-bower bowerrc `<pathToFile>`  
 Set the bowerrc file by providing the location of your .bowerrc file. It will be stored.  
 Example:
 ```
